@@ -10,24 +10,28 @@ const { validateBody } = require("../../middlewares");
 
 const router = express.Router();
 
-router.get("/", ctrlWrapper(ctrl.listContacts));
+router.get("/", ctrlWrapper(ctrl.listContactsController));
 
-router.get("/:contactId", ctrlWrapper(ctrl.getContactById));
+router.get("/:contactId", ctrlWrapper(ctrl.getContactByIdController));
 
-router.post("/", validateBody(schemas.addSchema), ctrlWrapper(ctrl.addContact));
+router.post(
+  "/",
+  validateBody(schemas.addSchema),
+  ctrlWrapper(ctrl.addContactController)
+);
 
-router.delete("/:contactId", ctrlWrapper(ctrl.removeContact));
+router.delete("/:contactId", ctrlWrapper(ctrl.removeContactController));
 
 router.put(
   "/:contactId",
   validateBody(schemas.addSchema),
-  ctrlWrapper(ctrl.updateContact)
+  ctrlWrapper(ctrl.updateContactController)
 );
 
 router.patch(
   "/:contactId/favorite",
   validateBody(schemas.updateFavoriteSchema),
-  ctrlWrapper(ctrl.updateStatusContact)
+  ctrlWrapper(ctrl.updateStatusContactController)
 );
 
 module.exports = router;
