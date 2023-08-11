@@ -1,5 +1,7 @@
 const Joi = require("joi");
 
+const emailRegExp = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
+
 const addSchema = Joi.object({
   name: Joi.string()
     .trim()
@@ -13,6 +15,7 @@ const addSchema = Joi.object({
     .required(),
   email: Joi.string()
     .email({ minDomainSegments: 2, tlds: { allow: false } })
+    .pattern(emailRegExp)
     .messages({
       "string.pattern.base": "Invalid email. The email must be valid.",
     })
