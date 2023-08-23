@@ -26,13 +26,20 @@ const loginSchema = Joi.object({
 });
 
 const subscriptionSchema = Joi.object({
-  subscription: Joi.string().valid(...allSubscriptions).required()
+  subscription: Joi.string()
+    .valid(...allSubscriptions)
+    .required(),
+});
+
+const verifyEmailSchema = Joi.object({
+  email: Joi.string().pattern(emailRegExp).required(),
 });
 
 const schemas = {
   registerSchema,
   loginSchema,
   subscriptionSchema,
+  verifyEmailSchema,
 };
 
 module.exports = { schemas };
