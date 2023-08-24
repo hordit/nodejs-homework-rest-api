@@ -16,6 +16,14 @@ router.post(
   ctrlWrapper(ctrl.registerController)
 );
 
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verifyController));
+
+router.post(
+  "/verify/",
+  validateBody(schemas.verifyEmailSchema),
+  ctrlWrapper(ctrl.resendEmailController)
+);
+
 router.post(
   "/login",
   validateBody(schemas.loginSchema),
@@ -33,6 +41,11 @@ router.patch(
   ctrlWrapper(ctrl.updateSubscriptionController)
 );
 
-router.patch("/avatars", authenticate, upload.single("avatar"), ctrlWrapper(ctrl.updateAvatarController))
+router.patch(
+  "/avatars",
+  authenticate,
+  upload.single("avatar"),
+  ctrlWrapper(ctrl.updateAvatarController)
+);
 
 module.exports = router;
